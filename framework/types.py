@@ -19,6 +19,7 @@ class OutgoingMessage(BaseModel):
 
 class EventMessage(BaseModel):
     """Класс для представления исходящего сообщения (сообщения от сервера)."""
+    event_uid: Optional[str] = None
     event_type: str  # HTTP-статус код (например, 200)
     data: Optional[dict | str]  # данные от одного из подключений
 

@@ -241,7 +241,7 @@ class WebSocketFramework:
                 except websockets.ConnectionClosed:
                     await websocket.close()
                 except Exception as e:
-                    logger.warning(f"Ping failed for {websocket.ping}: {e}")
+                    logger.warning(f"Ping failed for {websocket.remote_address[0]}:{websocket.remote_address[1]} - {e}")
 
     async def run(self, on_startup: Coroutine):
         await on_startup
