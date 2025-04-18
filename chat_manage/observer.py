@@ -1,8 +1,8 @@
 from websockets import ClientConnection
-import asyncio
+# import asyncio
 
-from framework.types import EventMessage, IncomingMessage
-from framework.app import WebSocketFramework
+# from server.types import EventMessage, IncomingMessage
+# from server.server import WebSocketServer
 
 
 class Observer:
@@ -29,21 +29,21 @@ class Observer:
             del self.clients[socket]
 
 
-    async def notify(self, server: WebSocketFramework, msg: IncomingMessage):
-        """Уведомляем всех подписчиков о событии."""
-        # Создаем задачи для всех подписчиков, которых нужно уведомить
-        tasks = []
-        for socket, subscriptions in self.clients.items():
-            if msg.event_type in subscriptions:
-                tasks.append(
-                    server.send_response(
-                        socket,
-                        EventMessage(
-                            event_type=msg.event_type,
-                            data=msg.data,
-                            event_uid=msg.uid
-                        )
-                    )
-                )
-        result = await asyncio.gather(*tasks, return_exceptions=True)
-        return result
+    # async def notify(self, server: WebSocketServer, msg: IncomingMessage):
+    #     """Уведомляем всех подписчиков о событии."""
+    #     # Создаем задачи для всех подписчиков, которых нужно уведомить
+    #     tasks = []
+    #     for socket, subscriptions in self.clients.items():
+    #         if msg.event_type in subscriptions:
+    #             tasks.append(
+    #                 server.send_response(
+    #                     socket,
+    #                     EventMessage(
+    #                         event_type=msg.event_type,
+    #                         data=msg.data,
+    #                         event_uid=msg.uid
+    #                     )
+    #                 )
+    #             )
+    #     result = await asyncio.gather(*tasks, return_exceptions=True)
+    #     return result
